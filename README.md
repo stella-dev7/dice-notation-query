@@ -47,12 +47,23 @@ $ echo "2d20+5" | dicedist --at-least 30
 `--at-most N` and `--exactly N` work the same way. Add `--json` to get
 one JSON object per line instead, for feeding into another tool.
 
+Keep-highest/lowest works the same as any other expression:
+
+```
+$ echo "4d6kh3" | dicedist
+4d6kh3: min=3 max=18 mean=12.245 stdev=2.847
+```
+
 ## Notation supported so far
 
 `NdM`, `NdM+K`, `NdM-K` -- for example `d20`, `3d6`, `2d8+3`, `4d4-2`.
-`N` defaults to 1 if omitted. Keep-highest/lowest (`4d6kh3`) and
-multi-term expressions (`2d6+1d4`) aren't parsed yet; see the roadmap
-below.
+`N` defaults to 1 if omitted.
+
+Keep-highest/lowest is written `NdMkhJ` or `NdMklJ`, where `J` is how
+many of the `N` dice to keep -- for example `4d6kh3` (roll 4d6, keep
+the best 3, the classic ability score method) or `2d20kl1`
+(disadvantage). A modifier can follow: `4d6kh3+1`. Multi-term
+expressions (`2d6+1d4`) aren't parsed yet; see the roadmap below.
 
 ## Running it
 
@@ -67,7 +78,6 @@ or install it so the `dicedist` command is on your PATH (`pip install
 
 ## Roadmap
 
-- keep-highest / keep-lowest (`4d6kh3`, common for ability score rolls)
 - multi-term expressions (`2d6+1d4+3`)
 - a text histogram of the full distribution, not just summary stats
 - caching distributions for repeated identical expressions in one run
